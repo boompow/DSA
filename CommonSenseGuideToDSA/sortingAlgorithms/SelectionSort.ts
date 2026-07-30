@@ -4,7 +4,8 @@ const arr: number[] = [3, 1, 4, 5, 2, 8, 12, 9, 6, 17, 15]
 
 function selectionSort(list: number[]) {
     let startIndex = 0
-    let steps = 0
+    let comparisons = 0
+    let swaps = 0
 
     while (startIndex < list.length - 1) {
         // let's assume the lowest value index is the start index and update it after looping through the list
@@ -13,14 +14,18 @@ function selectionSort(list: number[]) {
             if (list[i] < list[lowestValueIndex]) {
                 lowestValueIndex = i
             }
-            steps++
+            comparisons++
         }
 
-        [list[startIndex], list[lowestValueIndex]] = [list[lowestValueIndex], list[startIndex]]
+        if (lowestValueIndex !== startIndex) {
+            [list[startIndex], list[lowestValueIndex]] = [list[lowestValueIndex], list[startIndex]]
+            swaps++
+        }
+        // since the current start index is sorted the pointer should be moved to the next index
         startIndex++
     }
 
-    console.log(steps)
+    console.log(`${comparisons} Comparisons, ${swaps} Swaps, and a total of ${swaps + comparisons} steps`)
     return list
 }
 
