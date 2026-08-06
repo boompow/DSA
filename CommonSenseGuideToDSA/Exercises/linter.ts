@@ -21,43 +21,31 @@ class Stack<T = string> {
     }
 }
 
-
-function isOpeningBrace(brace: string): boolean {
-    let openingBraces = ['{', '(', '[', '<']
-
-    return openingBraces.includes(brace)
-}
-function isClosingBrace(brace: string): boolean {
-    let closingBraces = ['}', ')', ']', '>']
-
-    return closingBraces.includes(brace)
-}
-
-function doesNotMatch(openingBrace: string, closingBrace: string) {
-    return closingBrace !== {
-        "(": ")",
-        "[": "]",
-        "<": ">",
-        "{": "}",
-    }[openingBrace]
+const OPENING_BRACES = ['{', '(', '[', '<']
+const CLOSING_BRACES = ['}', ')', ']', '>']
+const BRACE_PAIRS: Record<string, string> = {
+    "(": ")",
+    "[": "]",
+    "<": ">",
+    "{": "}",
 }
 
 function linter(code: string) {
     let stack = new Stack()
 
     for (let item of code) {
-        if (isOpeningBrace(item)) {
+        if (OPENING_BRACES.includes(item)) {
             stack.push(item)
         }
 
-        else if (isClosingBrace(item)) {
+        else if (CLOSING_BRACES.includes(item)) {
             let poppedBrace = stack.pop()
 
             if (!poppedBrace) {
                 return `missing opening brace for ${item}`
             }
 
-            if (doesNotMatch(poppedBrace, item)) {
+            if (poppedBrace !== BRACE_PAIRS[item]) {
                 return `braces don't match: ${item} and ${poppedBrace}`
 
             }
@@ -72,4 +60,4 @@ function linter(code: string) {
 }
 
 
-console.log(linter("(var x = [12>"))
+console.log(linter("(var x = [12>)"))
