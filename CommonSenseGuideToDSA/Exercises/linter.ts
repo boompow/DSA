@@ -45,7 +45,7 @@ function linter(code: string) {
                 return `missing opening brace for ${item}`
             }
 
-            if (poppedBrace !== BRACE_PAIRS[item]) {
+            if (BRACE_PAIRS[poppedBrace] !== item) {
                 return `braces don't match: ${item} and ${poppedBrace}`
 
             }
