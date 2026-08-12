@@ -12,15 +12,14 @@ export { }
 //     return totalCount
 // }
 
-function characterCount(arr: string[], index = 1): number {
+function characterCount(arr: string[]): number {
     let totalCount = 0
 
-    if (arr.length === 1) {
-        return totalCount += arr[0].length
+    if (arr.length === 0) {
+        return totalCount
     }
 
-    totalCount += arr[0].length + characterCount(arr.slice(index,), index++)
-
+    totalCount += arr[0].length + characterCount(arr.slice(1))
     return totalCount
 }
 
