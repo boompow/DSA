@@ -28,6 +28,23 @@ function partition(list: number[], left_pointer: number, right_pointer: number):
     return left_pointer
 }
 
+// swap partition with lomutoPartition in the quickSelect
+function lomutoPartition(list: number[], low: number, high: number): number {
+    const pivot = list[high]
+    let pointer = low - 1
+
+    for (let j = low; j < high; j++) {
+        if (list[j] <= pivot) {
+            pointer++
+            [list[pointer], list[j]] = [list[j], list[pointer]]
+        }
+    }
+
+    [list[pointer + 1], list[high]] = [list[high], list[pointer + 1]]
+
+    return pointer + 1
+}
+
 function quickSelect(list: number[], requiredIndex: number, left_pointer: number = 0, right_pointer: number = list.length - 1) {
     if (right_pointer - left_pointer <= 0) return;
 
@@ -48,4 +65,6 @@ function quickSelect(list: number[], requiredIndex: number, left_pointer: number
 }
 
 
-console.log(quickSelect([1, 5, 7, 6, 9, 32, 51, 2, 3], 4))
+console.log(quickSelect([1, 5, 7, 6, 9, 32, 51, 2, 3], 7))
+
+// console.log(lomutoPartition([7, 2, 1, 6, 8, 5], 0, 5))
