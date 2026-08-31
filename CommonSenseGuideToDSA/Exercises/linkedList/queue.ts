@@ -68,6 +68,18 @@ class Queue<T> {
 
         return list
     }
+
+    reveresedList() {
+        let list: T[] = []
+        let current = this.tail
+
+        while (current) {
+            list.push(current.data)
+            current = current.previous
+        }
+
+        return list
+    }
 }
 
 const queue = new Queue()
@@ -76,4 +88,4 @@ queue.enqueue(12)
 queue.enqueue(3)
 queue.enqueue(1)
 
-console.log(queue.listAll())
+console.log(queue.reveresedList())
