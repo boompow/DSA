@@ -56,6 +56,18 @@ class Queue<T> {
         return removedNode
 
     }
+
+    listAll() {
+        let list: T[] = []
+        let current = this.head
+
+        while (current) {
+            list.push(current.data)
+            current = current.next
+        }
+
+        return list
+    }
 }
 
 const queue = new Queue()
@@ -64,4 +76,4 @@ queue.enqueue(12)
 queue.enqueue(3)
 queue.enqueue(1)
 
-console.log(queue.dequeue())
+console.log(queue.listAll())
