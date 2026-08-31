@@ -92,6 +92,18 @@ class LinkedList<T> {
 
         return false
     }
+
+    listAll() {
+        let list: T[] = []
+        let current = this.head
+
+        while (current) {
+            list.push(current.data)
+            current = current.next
+        }
+
+        return list
+    }
 }
 
 const list = new LinkedList
@@ -101,4 +113,4 @@ list.append(9)
 list.append(45)
 list.append(12)
 
-console.log(list.find(4))
+console.log(list.listAll())
