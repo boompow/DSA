@@ -1,5 +1,6 @@
 export { }
 
+// classic single linked list
 class ListNode<T> {
     data: T;
     next: ListNode<T> | null = null;
@@ -93,7 +94,7 @@ class LinkedList<T> {
         return false
     }
 
-    listAll() {
+    listAll(): T[] {
         let list: T[] = []
         let current = this.head
 
@@ -104,6 +105,11 @@ class LinkedList<T> {
 
         return list
     }
+
+    last(): T | null {
+        if (!this.tail) return null
+        return this.tail.data
+    }
 }
 
 const list = new LinkedList
@@ -112,5 +118,7 @@ list.append(4)
 list.append(9)
 list.append(45)
 list.append(12)
+list.append(18)
+list.append(34)
 
-console.log(list.listAll())
+console.log(list.last())
