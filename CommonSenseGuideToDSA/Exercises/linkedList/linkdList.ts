@@ -110,6 +110,25 @@ class LinkedList<T> {
         if (!this.tail) return null
         return this.tail.data
     }
+
+    reverseList(): T[] {
+        let list: T[] = []
+        let reversedList: T[] = []
+        let current = this.head
+
+        while (current) {
+            list.push(current.data)
+            current = current.next
+        }
+
+
+        // using another loop to reverse it
+        for (let i = list.length; i > 0; i--) {
+            reversedList.push(list[i - 1])
+        }
+
+        return reversedList
+    }
 }
 
 const list = new LinkedList
@@ -121,4 +140,4 @@ list.append(12)
 list.append(18)
 list.append(34)
 
-console.log(list.last())
+console.log(list.reverseList())
