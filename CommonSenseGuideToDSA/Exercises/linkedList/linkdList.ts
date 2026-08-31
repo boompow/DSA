@@ -150,6 +150,18 @@ class LinkedList<T> {
 
         return list
     }
+
+    deleteByPointer(data: ListNode<T>): boolean {
+        // I actually didn't get it until I saw the solution in the book for this case. The thing that confused me was that the previous node would be pointing to a deleted node. but the solution was not to delete the accessed node but to change the data and its next pointer
+
+        let accessedNode = data
+        if (!accessedNode.next) return false
+        accessedNode.data = accessedNode.next.data
+        accessedNode.next = accessedNode.next.next
+
+        return true
+
+    }
 }
 
 const list = new LinkedList
