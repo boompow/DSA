@@ -129,6 +129,27 @@ class LinkedList<T> {
 
         return reversedList
     }
+
+    reverseListWithTwoPointers(): T[] {
+        let list: T[] = []
+        let current = this.head
+
+        while (current) {
+            list.push(current.data)
+            current = current.next
+        }
+
+        let left = 0
+        let right = list.length - 1
+
+        while (left < right) {
+            [list[left], list[right]] = [list[right], list[left]]
+            left++
+            right--
+        }
+
+        return list
+    }
 }
 
 const list = new LinkedList
@@ -140,4 +161,4 @@ list.append(12)
 list.append(18)
 list.append(34)
 
-console.log(list.reverseList())
+console.log(list.reverseListWithTwoPointers())
