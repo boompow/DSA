@@ -121,6 +121,17 @@ class BinarySearchTree<T> {
         return list
 
     }
+
+    max(): T | null {
+        if (!this.root) return null
+
+        let current_node = this.root
+        while (current_node.right !== null) {
+            current_node = current_node.right
+        }
+
+        return current_node.data
+    }
 }
 
 
@@ -136,4 +147,4 @@ BST.insert(91)
 
 let BST_traversal = BST.traverse()
 
-console.log(BST_traversal)
+console.log(BST.max())
