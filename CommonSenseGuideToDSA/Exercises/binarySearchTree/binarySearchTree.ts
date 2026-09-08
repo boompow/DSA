@@ -103,6 +103,24 @@ class BinarySearchTree<T> {
             return node.right
         }
     }
+
+    // BST traversal
+    traverse(): T[] {
+        let list: T[] = []
+
+        function recursion(node: BinaryNode<T> | null): void {
+            if (!node) return;
+
+            recursion(node.left)
+            list.push(node.data)
+            recursion(node.right)
+        }
+
+        recursion(this.root)
+
+        return list
+
+    }
 }
 
 
@@ -111,6 +129,11 @@ let BST = new BinarySearchTree()
 BST.insert(10)
 BST.insert(1)
 BST.insert(12)
-BST.insert(15)
+BST.insert(3)
+BST.insert(7)
+BST.insert(19)
+BST.insert(91)
 
-console.log(BST.search(1))
+let BST_traversal = BST.traverse()
+
+console.log(BST_traversal)
