@@ -68,6 +68,41 @@ class BinarySearchTree<T> {
         return null
 
     }
+
+    // delete button
+    // this has been the most challenging concept to implement thus far, and this is directly from the book
+    delete(data: T, node: BinaryNode<T> | null): BinaryNode<T> | null {
+        if (!node) return null
+
+        else if (data > node.data) {
+            node.right = this.delete(data, node.right)
+            return node
+        } else if (data < node.data) {
+            node.left = this.delete(data, node.left)
+            return node
+        } else if (data === node.data) {
+            //  case 1: if there is one or no node
+            if (!node.left) return node.right
+            else if (!node.right) return node.left
+
+            // case of 2 children nodes for the node that needs to be deleted
+            node.right = this.lift(node.right, node)
+            return node
+
+        }
+
+        return null
+    }
+
+    lift(node: BinaryNode<T>, nodeToDelete: BinaryNode<T>) {
+        if (node.left) {
+            node.left = this.lift(node.left, nodeToDelete)
+            return node
+        } else {
+            nodeToDelete.data = node.data
+            return node.right
+        }
+    }
 }
 
 
