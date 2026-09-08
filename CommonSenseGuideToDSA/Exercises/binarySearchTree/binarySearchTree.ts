@@ -132,6 +132,17 @@ class BinarySearchTree<T> {
 
         return current_node.data
     }
+
+    min(): T | null {
+        if (!this.root) return null
+
+        let current_node = this.root
+        while (current_node.left !== null) {
+            current_node = current_node.left
+        }
+
+        return current_node.data
+    }
 }
 
 
@@ -147,4 +158,4 @@ BST.insert(91)
 
 let BST_traversal = BST.traverse()
 
-console.log(BST.max())
+console.log(BST.min())
