@@ -1,5 +1,12 @@
 export { }
 
+// trie search return type
+type searchReturnType = {
+    currentNode: TrieNode,
+    matchedPrefix: string
+
+}
+
 class TrieNode {
     children: Map<string, TrieNode | null> = new Map()
 }
@@ -20,36 +27,36 @@ class Trie {
                 currentNode.children.set(char, newNode)
                 currentNode = newNode
             }
-
         }
-
         currentNode.children.set("*", null)
     }
 
     // search for a word
-    search(word: string): TrieNode | null {
+    search(word: string): searchReturnType | null {
         let currentNode = this.root
+        let matchedPrefix = ""
 
         for (let char of word) {
             if (currentNode.children.has(char)) {
                 currentNode = currentNode.children.get(char)!
-            } else {
-                return null
+                matchedPrefix += char
             }
-
+            else {
+                break
+            }
         }
-        return currentNode
+
+        if (matchedPrefix === "") return null
+        return { currentNode, matchedPrefix }
     }
 
     // 
-    collectAllWords(node: TrieNode | null = null, word: string = "", words: string[] = []) {
-        let currentNode = node || this.root
-
-        for (let [key, childNode] of currentNode.children.entries()) {
+    private collectAllWords(node: TrieNode, word: string = "", words: string[] = []) {
+        for (let [key, childNode] of node.children.entries()) {
             if (key === "*") {
                 words.push(word)
             } else {
-                this.collectAllWords(childNode, word + key, words)
+                this.collectAllWords(childNode!, word + key, words)
             }
         }
 
@@ -57,11 +64,12 @@ class Trie {
     }
 
     autocomplete(prefix: string) {
-        let currentNode = this.search(prefix)
+        let result = this.search(prefix)
+        if (!result) return null
 
-        if (!currentNode) return null
+        let { currentNode, matchedPrefix } = result
 
-        return this.collectAllWords(currentNode, prefix)
+        return this.collectAllWords(currentNode, matchedPrefix)
     }
 }
 
@@ -74,4 +82,4 @@ trie.insert("wok")
 trie.insert("luck")
 trie.insert("tick")
 
-console.log(trie.autocomplete("wo"))
+console.log(trie.autocomplete("worse"))
