@@ -40,11 +40,38 @@ class Trie {
         }
         return currentNode
     }
+
+    // Write a function that traverses each node of a trie and prints each key,
+    // including all "*" keys.
+    getAll(): string[] {
+        let list: string[] = []
+
+        function traverse(node: TrieNode) {
+            for (let [key, childNode] of node.children.entries()) {
+                if (node.children.has("*")) {
+                    list.push("*")
+                    return
+                }
+                list.push(key)
+                traverse(childNode!)
+            }
+        }
+
+        if (!this.root) return []
+
+        traverse(this.root)
+
+        return list
+
+    }
 }
 
 let trie = new Trie()
 
 trie.insert("word")
 trie.insert("world")
+trie.insert("wok")
+trie.insert("war")
+trie.insert("party")
 
-console.log(trie.search("words"))
+console.log(trie.getAll())
