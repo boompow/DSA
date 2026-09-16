@@ -1,4 +1,4 @@
-export { }
+
 
 class LinkNode<T> {
     data: T
@@ -11,11 +11,11 @@ class LinkNode<T> {
 
 }
 
-class Queue<T> {
+export default class Queue<T> {
     head: LinkNode<T> | null = null
     tail: LinkNode<T> | null = null
 
-    _size = 0
+    private _size = 0
 
     get size() {
         return this._size
@@ -82,10 +82,10 @@ class Queue<T> {
     }
 }
 
-const queue = new Queue()
+// const queue = new Queue()
 
-queue.enqueue(12)
-queue.enqueue(3)
-queue.enqueue(1)
+// queue.enqueue(12)
+// queue.enqueue(3)
+// queue.enqueue(1)
 
-console.log(queue.reveresedList())
+// console.log(queue.reveresedList())
