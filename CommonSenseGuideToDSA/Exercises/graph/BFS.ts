@@ -16,6 +16,25 @@ class Vertex<T> {
     }
 }
 
+function BFSTraversal<T>(startingVertex: Vertex<T>, visitedVertex: Set<T> = new Set()) {
+    let queue = new Queue<Vertex<T>>()
+
+    visitedVertex.add(startingVertex.value)
+    queue.enqueue(startingVertex)
+
+    while (queue.size) {
+        let currentVertex = queue.dequeue()!
+        console.log(currentVertex.value)
+
+        for (let adjacentVertex of currentVertex.adjacentVertices) {
+            if (!visitedVertex.has(adjacentVertex.value)) {
+                visitedVertex.add(adjacentVertex.value)
+                queue.enqueue(adjacentVertex)
+            }
+        }
+    }
+}
+
 function BFS<T>(startingVertex: Vertex<T>, searchedValue: T, visitedVertex: Set<T> = new Set()) {
     let queue = new Queue<Vertex<T>>()
 
@@ -45,4 +64,4 @@ alice.addAdjacentVertex(cynthia)
 bob.addAdjacentVertex(cynthia)
 cynthia.addAdjacentVertex(bob)
 
-console.log(BFS(alice, "cynthia"))
+console.log(BFSTraversal(alice))
