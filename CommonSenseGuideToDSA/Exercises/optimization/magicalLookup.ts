@@ -38,4 +38,49 @@ function getBooksWithAuthors() {
     return booksWithAuthors
 }
 
-console.log(getBooksWithAuthors())
+// console.log(getBooksWithAuthors())
+
+
+// second exercise: find the player that plays both basketball and football at O(m+n) time
+type GameType = {
+    first_name: string,
+    last_name: string,
+    team: string
+}
+
+const basketballPlayers = [
+    { first_name: "Jill", last_name: "Huang", team: "Gators" },
+    { first_name: "Janko", last_name: "Barton", team: "Sharks" },
+    { first_name: "Wanda", last_name: "Vakulskas", team: "Sharks" },
+    { first_name: "Jill", last_name: "Moloney", team: "Gators" },
+    { first_name: "Luuk", last_name: "Watkins", team: "Gators" }
+]
+
+const footballPlayers = [
+    { first_name: "Hanzla", last_name: "Radosti", team: "32ers" },
+    { first_name: "Tina", last_name: "Watkins", team: "Barleycorns" },
+    { first_name: "Alex", last_name: "Patel", team: "32ers" },
+    { first_name: "Jill", last_name: "Huang", team: "Barleycorns" },
+    { first_name: "Wanda", last_name: "Vakulskas", team: "Barleycorns" }
+]
+
+
+function findMultiGamePlayer(game1Players: GameType[], game2Players: GameType[]) {
+    const game1PlayersHashTable: Map<string, boolean> = new Map()
+    let multiplayerList = []
+
+
+    game1Players.map((player) => game1PlayersHashTable.set(`${player.first_name} ${player.last_name}`, true))
+
+
+    for (let player of game2Players) {
+        let isMultiplayer = game1PlayersHashTable.get(`${player.first_name} ${player.last_name}`)
+        if (isMultiplayer) {
+            multiplayerList.push(`${player.first_name} ${player.last_name}`)
+        }
+    }
+
+    return multiplayerList
+}
+
+console.log(findMultiGamePlayer(basketballPlayers, footballPlayers))
