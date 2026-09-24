@@ -37,4 +37,31 @@ function sortTemperature(tempList: number[]) {
     return sortedList
 }
 
-console.log(sortTemperature(arr))
+// console.log(sortTemperature(arr))
+
+// my implementation ignores redundancy
+
+// book's implementation
+
+function sortTemperature2(tempList: number[]) {
+    const tempHashTable: Map<number, number> = new Map()
+    let sortedList = []
+
+    for (let temp of tempList) {
+        tempHashTable.set(temp * 10, (tempHashTable.get(temp * 10) ?? 0) + 1)
+    }
+
+    let temp = 970
+    while (temp <= 990) {
+        if (tempHashTable.has(temp)) {
+            const count = tempHashTable.get(temp)
+            sortedList.push(...new Array(count).fill(temp / 10))
+        }
+
+        temp++
+    }
+
+    return sortedList
+}
+
+console.log(sortTemperature2(arr))
